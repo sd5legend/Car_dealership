@@ -1,1 +1,106 @@
+# AutoLot Pro — Dealership Management System
 
+AutoLot Pro is a command-line car dealership management application written in C. It brings together vehicle inventory, customer records, sales transactions and business reporting in one persistent application.
+
+## Features
+
+- **Inventory management:** Browse, add, update prices and archive vehicle listings.
+- **Vehicle search:** Case-insensitive search across make, model and fuel type.
+- **Sorting:** Sort available stock by price or model year.
+- **Sales workflow:** Record a customer, confirm a purchase, mark the vehicle as sold and generate a terminal receipt.
+- **Customer directory:** Retain customer contact records associated with sales.
+- **Sales history:** Review recorded transactions with date, customer, vehicle and sale price.
+- **Management dashboard:** Track active stock, total listings, customers, completed sales, lifetime revenue, average sale value and stock value.
+- **Persistent storage:** Save inventory, customers and sales to separate local data files between runs.
+- **Input validation:** Validate numeric input, years, odometer readings and prices.
+
+## Build and Run
+
+Requires GCC or Clang and a POSIX-like shell (Linux, macOS, WSL).
+
+```bash
+make
+./autolot
+```
+
+Alternatively, compile directly:
+
+```bash
+gcc -std=c11 -Wall -Wextra -Wpedantic -O2 -o autolot main.c
+./autolot
+```
+
+On first run, AutoLot creates a `data/` directory and seeds a sample showroom.
+
+Runtime data is stored in:
+
+- `data/cars.db`
+- `data/customers.db`
+- `data/sales.db`
+
+These files are generated locally and excluded from Git.
+
+## Application Menu
+
+| Option | Action |
+|---|---|
+| 1 | Browse available inventory |
+| 2 | Search vehicles |
+| 3 | Sort inventory |
+| 4 | Register a vehicle |
+| 5 | Sell a vehicle |
+| 6 | Update a vehicle price |
+| 7 | Archive a listing |
+| 8 | View sales history |
+| 9 | View customer directory |
+| 10 | View dealership dashboard |
+| 0 | Save and exit |
+
+## Data Model
+
+The application uses three C structures:
+
+- `Car` stores vehicle specifications and stock status.
+- `Customer` stores contact details for a recorded buyer.
+- `Sale` links a vehicle and customer to a dated transaction and sale price.
+
+The current implementation uses bounded in-memory arrays and pipe-delimited local data files. IDs are assigned sequentially and sales retain their own transaction records when a vehicle is archived.
+
+## Technical Concepts
+
+- C structures and arrays
+- Pointers and passing structures to functions
+- String handling and case-insensitive searching
+- Sorting and aggregation
+- Input validation and defensive programming
+- File I/O and persistence
+- Date/time handling with the C standard library
+- Modular function design
+
+## Limitations
+
+AutoLot Pro is an educational, single-user terminal application. It is not a production dealership platform.
+
+It does not process payments, provide authentication, encrypt customer data, support concurrent users or implement accounting-grade data integrity.
+
+Customer details are stored locally in plain text. Use synthetic data only.
+
+## Future Improvements
+
+- Dynamic memory allocation for expandable inventory
+- Unit and integration tests
+- CSV import/export
+- Vehicle categories, VINs and registration details
+- Salesperson accounts and role-based access
+- Financing estimates and service history
+- Separate source/header modules
+
+## Author
+
+**Siddarth Prakash**
+
+C programming project exploring practical software design, data management and dealership workflows.
+
+## License
+
+MIT License. See `LICENSE`.
